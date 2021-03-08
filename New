@@ -1,0 +1,19 @@
+mkdir pico
+cd pico
+git clone -b master https://github.com/raspberrypi/pico-sdk.git
+cd pico-sdk
+git submodule update --init
+cd ..
+git clone -b master https://github.com/raspberrypi/pico-examples.git
+sudo apt update
+sudo apt install cmake gcc-arm-none-eabi build-essential
+
+
+cd pico-examples
+mkdir build
+cd build
+export PICO_SDK_PATH=../../pico-sdk
+cmake ..
+cmake -DCMAKE_BUILD_TYPE=Debug
+cd blink
+make -j4
